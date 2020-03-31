@@ -43,6 +43,8 @@ public class Main {
       2. Process the hashtable to find out most ordered top two items
      */
     private static void process(ArrayList<Order> orders) {
+		
+		//For each  item in individual order, add order to the respoctive item field in hashmap
         orders.forEach(order -> {
             List<Item> li = order.getItems();
             li.forEach(item -> {
@@ -50,7 +52,8 @@ public class Main {
                 itemOrderHashMap.get(item).add(order.getOrderNo());
             });
         });
-
+		
+		//Finding top two items present in maximum orders
         itemOrderHashMap.forEach((item, list) -> {
             if(itemOrderHashMap.get(item).size() > max1) {
                 max1 = itemOrderHashMap.get(item).size();
@@ -62,6 +65,7 @@ public class Main {
             }
         });
 
+		//Priniting two items, count and orders
         System.out.println("Item " + item1No.getItemNo() +
                 " -> usageCount:" + itemOrderHashMap.get(item1No).size() +
                 " -> " + itemOrderHashMap.get(item1No).stream().map(item -> "Order " + item.toString() +", ").reduce("", String::concat));
